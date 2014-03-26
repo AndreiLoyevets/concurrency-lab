@@ -2,8 +2,16 @@ package com.epam.andrii_loievets.concurrency;
 
 import java.util.Random;
 
-public class MergeSort {
-    private int[] array;
+public class MergeSort implements Runnable {
+    private final int[] array; // shared between threads but the same
+    private final int startPos;
+    private final int endPos;
+    
+    public MergeSort(int [] array, int start, int end) {
+        this.array = array;
+        this.startPos = start;
+        this.endPos = end;
+    }
 
     public void sort(int start, int end) {
         if (end - start <= 1) {
@@ -12,8 +20,16 @@ public class MergeSort {
 
         int middle = (start + end) / 2;
 
-        sort(start, middle);
+        Thread th = new Thread(new MergeSort(array, start, middle));
+        th.start();
         sort(middle, end);
+        
+        try {
+            th.join();
+        } catch (InterruptedException ex) {
+            System.out.println(Thread.currentThread() + " interrupted unexpectedly");
+            return;
+        }
 
         merge(start, middle, end);
     }
@@ -32,8 +48,13 @@ public class MergeSort {
             ++posLeft;
         }
     }
+    
+    @Override
+    public void run() {
+        sort(startPos, endPos);
+    }
 
-    public int [] getRandomArray(int size) {
+    public static int [] getRandomArray(int size) {
 
         int [] list = new int[size];
 
@@ -53,9 +74,10 @@ public class MergeSort {
     }
 
     public static void main(String [] args) {
-        MergeSort mSort = new MergeSort();
+        final int ARRAY_SIZE = 100;
+        MergeSort mSort = new MergeSort(MergeSort.getRandomArray(ARRAY_SIZE), 0,
+                ARRAY_SIZE);
         
-        mSort.array = mSort.getRandomArray(10);
         System.out.println("Before sort:");
         mSort.printArray();
         mSort.sort(0, mSort.array.length);
