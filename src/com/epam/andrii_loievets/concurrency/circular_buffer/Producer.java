@@ -28,7 +28,6 @@ public class Producer implements Runnable {
             }
             
             buffer.put(i++);
-            System.out.println("Producer puts " + i);
         }
     }
     

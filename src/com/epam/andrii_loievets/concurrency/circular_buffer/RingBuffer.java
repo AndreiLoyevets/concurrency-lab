@@ -33,7 +33,7 @@ public class RingBuffer implements Buffer<Integer> {
         buffer[pos] = item;
         newest = pos;
         
-        printBufferState();
+        System.out.println(item + " added to buffer");
         
         notifyAll();
     }
