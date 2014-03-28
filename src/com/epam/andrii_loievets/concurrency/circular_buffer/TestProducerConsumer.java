@@ -22,7 +22,23 @@ public class TestProducerConsumer {
         }
     }
     
+    public static void concurrentTest() {
+        final int BUFFER_SIZE = 10;
+        final int NUM_PRODUCERS = 5;
+        final int NUM_CONSUMERS = 3;
+        
+        Buffer buffer = new ConcurrentRingBuffer(BUFFER_SIZE);
+        
+        for (int i = 0; i < NUM_PRODUCERS; ++i) {
+            new Thread(new Producer(buffer)).start();
+        }
+        
+        for (int i = 0; i < NUM_CONSUMERS; ++i) {
+            new Thread(new Consumer(buffer)).start();
+        }
+    }
+    
     public static void main(String [] args) {
-        noConcurrentTest();
+        concurrentTest();
     }
 }

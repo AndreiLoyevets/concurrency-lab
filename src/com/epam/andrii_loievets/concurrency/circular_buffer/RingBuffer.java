@@ -11,7 +11,7 @@ public class RingBuffer implements Buffer<Integer> {
     private int newest; // index of the newest (latest added) element
     
     public RingBuffer(int capacity) {
-        buffer = new Integer[capacity];
+        buffer = new Integer[capacity]; 
         oldest = 0; // as soon as we put something, it gets into buffer[0]
         newest = -1; // when we put something new, we first increment newest
     }

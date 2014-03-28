@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Andrii_Loievets@epam.com/Documents/NetBeansProjects/Concurrency%20Lab/src/com/epam/andrii_loievets/concurrency/circular_buffer/TestProducerConsumer.java</file>
+            <file>file:/C:/Users/Andrii_Loievets@epam.com/Documents/NetBeansProjects/Concurrency%20Lab/src/com/epam/andrii_loievets/concurrency/circular_buffer/ConcurrentRingBuffer.java</file>
             <file>file:/C:/Users/Andrii_Loievets@epam.com/Documents/NetBeansProjects/Concurrency%20Lab/src/com/epam/andrii_loievets/concurrency/circular_buffer/Buffer.java</file>
             <file>file:/C:/Users/Andrii_Loievets@epam.com/Documents/NetBeansProjects/Concurrency%20Lab/src/com/epam/andrii_loievets/concurrency/MergeSort.java</file>
             <file>file:/C:/Users/Andrii_Loievets@epam.com/Documents/NetBeansProjects/Concurrency%20Lab/src/com/epam/andrii_loievets/concurrency/circular_buffer/Consumer.java</file>

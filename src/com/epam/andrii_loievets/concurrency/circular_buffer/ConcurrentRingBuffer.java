@@ -25,11 +25,14 @@ public class ConcurrentRingBuffer implements Buffer<Integer> {
         lock = new ReentrantLock();
         notFull = lock.newCondition();
         notEmpty = lock.newCondition();
+        oldest = 0; // as soon as we put something, it gets into buffer[0]
+        newest = -1; // when we put something new, we first increment newest
     }
 
     @Override
     public void put(Integer item) {
         lock.lock();
+        
         try {
             while (isFull()) {
                 notFull.await();
@@ -61,6 +64,7 @@ public class ConcurrentRingBuffer implements Buffer<Integer> {
             }
 
             // take item
+            
             Integer item = buffer[oldest];
             buffer[oldest] = null;
             oldest = (1 + oldest) % buffer.length;
@@ -75,15 +79,26 @@ public class ConcurrentRingBuffer implements Buffer<Integer> {
             lock.unlock();
         }
     }
-
+    
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < buffer.length; ++i) {
+            if (buffer[i] != null) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     @Override
     public boolean isFull() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < buffer.length; ++i) {
+            if (buffer[i] == null) {
+                return false;
+            }
+        }
+        
+        return true;
     }
-
 }
