@@ -1,7 +1,9 @@
 package com.epam.andrii_loievets.concurrency.circular_buffer;
 
 /**
- *
+ * Implementation of ring buffer using synchronized constructions without
+ * java.util.concurrent.
+ * 
  * @author Andrii_Loievets
  * @version 1.0 26-March-2014
  */

@@ -3,10 +3,9 @@ package com.epam.andrii_loievets.concurrency.circular_buffer;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
+ * Implementation of ring buffer of integers using concurrent java library.
  *
  * @author Andrii_Loievets
  * @version 1.0 27-March-2014
@@ -32,7 +31,7 @@ public class ConcurrentRingBuffer implements Buffer<Integer> {
     @Override
     public void put(Integer item) {
         lock.lock();
-        
+
         try {
             while (isFull()) {
                 notFull.await();
@@ -64,13 +63,12 @@ public class ConcurrentRingBuffer implements Buffer<Integer> {
             }
 
             // take item
-            
             Integer item = buffer[oldest];
             buffer[oldest] = null;
             oldest = (1 + oldest) % buffer.length;
-            
+
             notFull.signalAll();
-            
+
             return item;
         } catch (InterruptedException ex) {
             System.out.println(Thread.currentThread() + "interrupted when getting item");
@@ -79,7 +77,7 @@ public class ConcurrentRingBuffer implements Buffer<Integer> {
             lock.unlock();
         }
     }
-    
+
     @Override
     public boolean isEmpty() {
         for (int i = 0; i < buffer.length; ++i) {
@@ -87,7 +85,7 @@ public class ConcurrentRingBuffer implements Buffer<Integer> {
                 return false;
             }
         }
-        
+
         return true;
     }
 
@@ -98,7 +96,7 @@ public class ConcurrentRingBuffer implements Buffer<Integer> {
                 return false;
             }
         }
-        
+
         return true;
     }
 }

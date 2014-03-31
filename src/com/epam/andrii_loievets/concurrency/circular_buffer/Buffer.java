@@ -1,7 +1,9 @@
 package com.epam.andrii_loievets.concurrency.circular_buffer;
 
 /**
- *
+ * Interface for fixed-size buffer with put and get methods, methods checking
+ * whether the buffer is full or empty.
+ * 
  * @author Andrii_Loievets
  * @version 1.0 26-March-2014
  * @param <E> type of the stored items

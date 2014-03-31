@@ -1,7 +1,8 @@
 package com.epam.andrii_loievets.concurrency.circular_buffer;
 
 /**
- *
+ * This class represents a consumer for producer-consumer problem.
+ * 
  * @author Andrii_Loievets
  * @version 1.0 26-March-2014
  */

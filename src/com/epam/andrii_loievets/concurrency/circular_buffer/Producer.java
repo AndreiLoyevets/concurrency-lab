@@ -1,17 +1,16 @@
 package com.epam.andrii_loievets.concurrency.circular_buffer;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
- *
+ * This class represents a producer for producer-consumer problem.
+ * 
  * @author Andrii_Loievets
  * @version 1.0 26-March-2014
  */
 public class Producer implements Runnable {
+
     private final Buffer buffer;
     private volatile static int i;
-    
+
     public Producer(Buffer buffer) {
         this.buffer = buffer;
     }
@@ -26,9 +25,9 @@ public class Producer implements Runnable {
                 System.out.println("Producer interrupted");
                 return;
             }
-            
+
             buffer.put(i++);
         }
     }
-    
+
 }
