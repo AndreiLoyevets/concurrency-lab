@@ -1,4 +1,4 @@
-package com.epam.andrii_loievets.concurrency;
+package com.epam.andrii_loievets.concurrency.mergesort;
 
 import java.util.Random;
 
