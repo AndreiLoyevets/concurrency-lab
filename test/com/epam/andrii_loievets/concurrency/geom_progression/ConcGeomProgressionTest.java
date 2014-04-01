@@ -73,6 +73,27 @@ public class ConcGeomProgressionTest {
         }
     }
     
+    @Test
+    public void next_2000Threads10000Numbers_NoDuplicatesAndMissingVal() {
+        ExecutorService es = Executors.newFixedThreadPool(2000);
+        ConcGeomProgression cgp = new ConcGeomProgression();
+        
+        GeomProber.setCounter(10000);
+        
+        for (int i = 0; i < 2000; ++i) {
+            es.submit(new GeomProber(cgp));
+        }
+        
+        es.shutdown();
+        
+        for (int i = 1; i <= results.size(); ++i) {
+
+            // check no values were skipped
+            assertTrue("Value " + i + " is missing",
+                    results.containsKey(new BigInteger(Integer.toString(i))));
+        }
+    }
+    
     static class GeomProber implements Runnable {
         
         private static volatile int counter;
